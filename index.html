@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth overflow-x-hidden">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software / Devops Engineer</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Phosphor Icons for modern icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Alpine.js for lightweight interactions & Data binding (DEFER IS REQUIRED) -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0B1120',
+                        cardBg: '#1E293B',
+                        primary: '#3B82F6',
+                        primaryHover: '#2563EB',
+                        accent: '#06B6D4'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- AOS JS Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- DATA SOURCE & ALPINE COMPONENT INIT -->
+    <script>
+        // Data Object Configuration
+        const myPortfolioData = {
+            logo: "NQA<span class='text-primary'>.</span>",
+            menu: [
+                { id: 1, label: 'About', link: '#about' },
+                { id: 2, label: 'Skills', link: '#skills' },
+                { id: 3, label: 'Education', link: '#education' },
+                { id: 4, label: 'Projects', link: '#projects' },
+                { id: 5, label: 'Certifications', link: '#certifications' },
+                { id: 6, label: 'Tools', link: '#affiliates' }
+            ],
+            hero: {
+                availability: 'Freelancer / Available for Work',
+                name: 'Son Nguyen',
+                title: 'Freelance Software / DevSecOps Engineer',
+                description: 'I specialize in building robust software solutions, managing CI/CD pipelines, and orchestrating cloud infrastructure. Passionate about system scalability and operational excellence.',
+                cvLink: './assets/CV_NguyenNgocSon.pdf' // Update this link to your actual CV PDF file path
+            },
+            about: {
+                paragraphs: [
+                    "Hello! I'm <strong>Nguyen Ngoc Son</strong>, a 23-year-old Software Engineer based in the vibrant city of <strong>Ha Noi City, Vietnam</strong>.",
+                    "Born in 2004, I grew up with a deep curiosity for how systems operate behind the scenes. My engineering journey has led me to specialize not just in writing code, but in the entire software delivery lifecycle. I bridge the gap between development and operations, ensuring code is shipped reliably, securely, and efficiently."
+                ],
+                age: '23 Years (Born 2004)',
+                location: 'Ha Noi City, VN'
+            },
+            skills: [
+                {
+                    id: 1, title: 'Cloud & Infrastructure', delay: '100',
+                    icon: 'ph-duotone ph-cloud', iconBg: 'bg-blue-500/10 border-blue-500/20', iconColor: 'text-blue-400', checkColor: 'text-primary',
+                    description: 'Experience in provisioning, managing, and scaling server infrastructure across major cloud providers and Kubernetes clusters.',
+                    items: [
+                        'AWS (Amazon Web Services)',
+                        'Microsoft Azure',
+                        'Amazon EC2',
+                        'Kubernetes',
+                        'Helm',
+                        'ArgoCD',
+                        'GitOps',
+                        'HomeServer Setup & Config'
+                    ]
+                },
+                {
+                    id: 2, title: 'DevOps & Tooling', delay: '200',
+                    icon: 'ph-duotone ph-git-merge', iconBg: 'bg-orange-500/10 border-orange-500/20', iconColor: 'text-orange-400', checkColor: 'text-orange-500',
+                    description: 'Implementing automated pipelines, containerization, and GitOps workflows to streamline the deployment process.',
+                    items: [
+                        'Docker Containerization',
+                        'Helm',
+                        'ArgoCD',
+                        'CI/CD (GitHub Actions, Jenkins, GitLab)',
+                        'Git Version Control',
+                        'GitLab',
+                        'Jenkins',
+                        'SonarQube',
+                        'Nginx',
+                        'Postman',
+                        'Linux',
+                        'VSCode',
+                        'IntelliJ IDEA'
+                    ]
+                },
+                {
+                    id: 3, title: 'System & Soft Skills', delay: '300',
+                    icon: 'ph-duotone ph-users-three', iconBg: 'bg-green-500/10 border-green-500/20', iconColor: 'text-green-400', checkColor: 'text-green-500',
+                    description: 'Strong foundation in system troubleshooting, distributed systems, and agile methodologies for team success.',
+                    items: [
+                        'Windows Troubleshooting',
+                        'Agile / Kanban Methodology',
+                        'Cross-functional Teamwork',
+                        'Time Management',
+                        'Linux',
+                        'Distributed Systems',
+                        'Kafka',
+                        'Redis'
+                    ]
+                },
+                {
+                    id: 4, title: 'Software Development', delay: '400',
+                    icon: 'ph-duotone ph-code', iconBg: 'bg-purple-500/10 border-purple-500/20', iconColor: 'text-purple-400', checkColor: 'text-purple-500',
+                    description: 'Building scalable applications and backend services using various languages and robust frameworks.',
+                    items: [
+                        'PHP (Laravel) & Python',
+                        'Java (Spring Boot, Spring Cloud Gateway, Netflix Eureka)',
+                        'C# & C/C++',
+                        'ReactJS',
+                        'Cassandra',
+                        'Postgres',
+                        'Kafka',
+                        'Keycloak',
+                        'Redis'
+                    ]
+                }
+            ],
+            skillTags: [
+                'Python', 'Java', 'PHP', 'C#', 'C/C++', 'Laravel', 'Spring Boot', 'Spring Cloud Gateway', 'Netflix Eureka',
+                'Docker', 'Kubernetes', 'Helm', 'ArgoCD', 'GitOps', 'CI/CD', 'GitHub Actions', 'Jenkins', 'AWS', 'Azure', 'EC2',
+                'GitLab', 'Kanban', 'Kafka', 'Keycloak', 'Cassandra', 'Postgres', 'Redis', 'ReactJS', 'VSCode', 'IntelliJ IDEA',
+                'SonarQube', 'Nginx', 'Postman', 'Linux'
+            ],
+            education: [
+                {
+                    id: 1, degree: 'Bachelor of Software Engineering', period: 'Graduated', delay: '0',
+                    school: 'Hanoi University of Industry',
+                    highlight: '✨ Graduated with Distinction | GPA: 3.40/4.0',
+                    description: 'Core coursework includes Data Structures & Algorithms, System Architecture, and Object-Oriented Programming. Deeply focused on applying CI/CD practices in academic projects.',
+                    icon: 'ph-fill ph-graduation-cap', iconColor: 'text-primary', periodBg: 'bg-primary/10 text-primary border-primary/20'
+                },
+                {
+                    id: 2, degree: 'High School Diploma', period: '2018 - 2021', delay: '100',
+                    school: 'THPT Kỳ Anh',
+                    highlight: '',
+                    description: 'Strong foundation in Mathematics and Natural Sciences. Developed an early passion for technology, automation, and computer systems.',
+                    icon: 'ph-fill ph-student', iconColor: 'text-accent', periodBg: 'bg-accent/10 text-accent border-accent/20'
+                }
+            ],
+            projects: [
+                {
+                    id: 1, title: 'Pipeline DevSecOps', icon: 'ph-duotone ph-robot', link: 'https://www.youtube.com/watch?v=4okTrvRzhAc&', hideIcon: true,
+                    description: 'A comprehensive DevSecOps pipeline demonstrating automated CI/CD workflows with security scanning, infrastructure provisioning, and deployment orchestration.',
+                    tags: [
+                        { name: 'Kubernetes', class: 'bg-blue-500/10 text-blue-400 border-blue-500/20' },
+                        { name: 'Docker', class: 'bg-slate-800 text-slate-300 border-slate-700' },
+                        { name: 'CI/CD', class: 'bg-slate-800 text-slate-300 border-slate-700' },
+                        { name: 'Security', class: 'bg-purple-500/10 text-purple-400 border-purple-500/20' }
+                    ]
+                }
+            ],
+            certifications: [
+                { id: 1, title: 'AWS Certified Solutions Architect', issuer: 'Amazon Web Services', delay: '100', icon: 'ph-duotone ph-certificate', iconColor: 'text-yellow-500', iconBg: 'bg-yellow-500/10 border-yellow-500/20' },
+                { id: 2, title: 'Docker Essentials: A Developer Introduction', issuer: 'IBM / Docker', delay: '200', icon: 'ph-duotone ph-medal', iconColor: 'text-blue-500', iconBg: 'bg-blue-500/10 border-blue-500/20' },
+                { id: 3, title: 'Software Engineering Foundations', issuer: 'HackerRank / Coursera', delay: '300', icon: 'ph-duotone ph-graduation-cap', iconColor: 'text-purple-500', iconBg: 'bg-purple-500/10 border-purple-500/20' },
+                { id: 4, title: 'Agile & Kanban Basics', issuer: 'Scrum.org', delay: '400', icon: 'ph-duotone ph-shield-check', iconColor: 'text-green-500', iconBg: 'bg-green-500/10 border-green-500/20' },
+                { id: 5, title: 'One time Awarded Academic Achievement Scholarship', issuer: 'Excellent Grade Semester 2024', delay: '500', icon: 'ph-duotone ph-trophy', iconColor: 'text-red-500', iconBg: 'bg-red-500/10 border-red-500/20' }
+            ],
+            affiliates: [
+                { id: 1, title: 'DigitalOcean Cloud', delay: '100', icon: 'ph-duotone ph-cloud-arrow-up', iconColor: 'text-blue-500', iconBg: 'bg-blue-500/10 border-blue-500/20', description: 'Get $200 in credit over 60 days to spin up your own droplets and test deployments.', link: '#' },
+                { id: 2, title: 'Keychron Keyboards', delay: '200', icon: 'ph-duotone ph-keyboard', iconColor: 'text-orange-500', iconBg: 'bg-orange-500/10 border-orange-500/20', description: 'My favorite mechanical keyboards for writing code comfortably all day long.', link: '#' },
+                { id: 3, title: 'NordVPN', delay: '300', icon: 'ph-duotone ph-shield-star', iconColor: 'text-green-500', iconBg: 'bg-green-500/10 border-green-500/20', description: 'Stay secure while managing remote servers and accessing geo-restricted content.', link: '#' }
+            ],
+            donate: {
+                bank: 'Techcombank (TCB)',
+                account: '2812886886',
+                name: 'Nguyen Ngoc Son',
+                message: 'mi hao hao',
+                qrCodeUrl: 'assets/img/QR.jpg'
+            },
+            contact: {
+                email: 'sonvipkl04@gmail.com',
+                linkedin: '#',
+                github: 'https://github.com/sonnn128',
+                telegram: '' // Đổi thành link thật của bạn nhé
+            }
+        };
+
+        // Expose portfolioApp globally so Alpine.js can find it reliably
+        window.portfolioApp = function () {
+            return {
+                data: myPortfolioData,
+                mobileMenuOpen: false,
+                scrolled: false,
+                year: new Date().getFullYear(),
+                copied: false,
+
+                // Hàm Copy Số Tài Khoản
+                copyToClipboard(text) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        this.copied = true;
+                        setTimeout(() => { this.copied = false; }, 2000);
+                    }).catch(err => {
+                        // Fallback in iframe if clipboard API fails
+                        const el = document.createElement('textarea');
+                        el.value = text;
+                        document.body.appendChild(el);
+                        el.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(el);
+                        this.copied = true;
+                        setTimeout(() => { this.copied = false; }, 2000);
+                    });
+                },
+
+                init() {
+                    // Initialize AOS after Alpine has rendered the DOM
+                    this.$nextTick(() => {
+                        if (typeof AOS !== 'undefined') {
+                            AOS.init({
+                                once: true,
+                                offset: 100,
+                                duration: 800,
+                                easing: 'ease-out-cubic',
+                            });
+                        }
+                    });
+                }
+            };
+        };
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        body {
+            background-color: #0B1120;
+            color: #F8FAFC;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0B1120;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+
+        /* Glassmorphism utility */
+        .glass-nav {
+            background: rgba(11, 17, 32, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body class="antialiased overflow-x-hidden relative w-full max-w-full" x-data="portfolioApp()"
+    @scroll.window="scrolled = (window.pageYOffset > 20)">
+
+    <!-- Background Decorative Elements -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/20 blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-accent/20 blur-[120px]"></div>
+    </div>
+
+    <!-- Navigation -->
+    <header :class="{ 'glass-nav py-4': scrolled, 'py-6 bg-transparent': !scrolled }"
+        class="fixed top-0 w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-tighter flex items-center gap-2">
+                <i class="ph-fill ph-terminal-window text-primary"></i>
+                <span x-html="data.logo"></span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:lg:flex gap-6 xl:gap-8 items-center text-sm font-medium text-slate-300">
+                <template x-for="item in data.menu" :key="item.id">
+                    <a :href="item.link" class="hover:text-white transition-colors" x-text="item.label"></a>
+                </template>
+                <a href="#contact"
+                    class="px-5 py-2.5 bg-primary/10 text-primary hover:bg-primary hover:text-white rounded-lg transition-all border border-primary/20">
+                    Contact
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Toggle -->
+            <button @click="mobileMenuOpen = !mobileMenuOpen"
+                class="lg:hidden text-slate-300 hover:text-white focus:outline-none">
+                <i class="ph ph-list text-3xl" x-show="!mobileMenuOpen"></i>
+                <i class="ph ph-x text-3xl" x-show="mobileMenuOpen" x-cloak></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-4" @click.away="mobileMenuOpen = false"
+            class="lg:hidden absolute top-full left-0 w-full glass-nav border-t border-slate-800 shadow-xl py-4 flex flex-col items-center gap-4"
+            x-cloak>
+            <template x-for="item in data.menu" :key="item.id">
+                <a :href="item.link" @click="mobileMenuOpen = false"
+                    class="text-slate-300 hover:text-white w-full text-center py-2" x-text="item.label"></a>
+            </template>
+            <a href="#contact" @click="mobileMenuOpen = false"
+                class="text-primary font-medium w-full text-center py-2">Contact</a>
+        </div>
+    </header>
+
+    <main class="overflow-x-hidden w-full">
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center pt-20 pb-10">
+            <div class="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-up" data-aos-duration="1000">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-slate-300 text-sm mb-6">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        </span>
+                        <span x-text="data.hero.availability"></span>
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-4 break-words">
+                        Hi, I'm <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent"
+                            x-text="data.hero.name"></span>
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl font-medium text-slate-400 mb-6 break-words"
+                        x-text="data.hero.title"></h2>
+                    <p class="text-slate-400 text-lg mb-8 max-w-lg leading-relaxed" x-text="data.hero.description"></p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#contact"
+                            class="px-8 py-3.5 bg-primary hover:bg-primaryHover text-white font-medium rounded-lg transition-colors flex items-center gap-2 shadow-lg shadow-primary/25">
+                            <i class="ph ph-paper-plane-tilt"></i> Get In Touch
+                        </a>
+                        <a :href="data.hero.cvLink" download
+                            class="px-8 py-3.5 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2 border border-slate-700">
+                            <i class="ph ph-download-simple"></i> Download CV
+                        </a>
+                        <a href="https://drive.google.com/file/d/1QTkDEOsM4LssXnQQYR-vK6S5IplLRDWz/view?usp=sharing" target="_blank"
+                            class="px-8 py-3.5 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2 border border-slate-700">
+                            <i class="ph ph-eye"></i> View CV
+                        </a>
+                        <a :href="data.contact.github" target="_blank"
+                            class="px-8 py-3.5 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2 border border-slate-700">
+                            <i class="ph ph-github-logo"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative hidden md:block" data-aos="fade-left" data-aos-duration="1200">
+                    <!-- Abstract Tech Graphic -->
+                    <div class="relative w-full aspect-square max-w-md mx-auto">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-accent/20 rounded-2xl rotate-3 scale-105 blur-sm">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-cardBg border border-slate-700 rounded-2xl p-6 shadow-2xl flex flex-col relative overflow-hidden">
+                            <!-- Fake code window -->
+                            <div class="flex gap-2 mb-6">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <div class="font-mono text-sm text-slate-300 space-y-2 opacity-80">
+                                <p><span class="text-pink-400">const</span> <span class="text-blue-400">developer</span>
+                                    = {</p>
+                                <p class="pl-4">name: <span class="text-green-400"
+                                        x-text="`'${data.hero.name}'`"></span>,</p>
+                                <p class="pl-4">age: <span class="text-orange-400">23</span>,</p>
+                                <p class="pl-4">location: <span class="text-green-400">'Ha Noi City'</span>,</p>
+                                <p class="pl-4">skills: [<span class="text-green-400">'Docker'</span>, <span
+                                        class="text-green-400">'CI/CD'</span>, <span
+                                        class="text-green-400">'Kubernetes'</span>],</p>
+                                <p class="pl-4">passion: <span class="text-green-400">'Building scalable systems'</span>
+                                </p>
+                                <p>};</p>
+                                <p class="mt-4"><span class="text-pink-400">developer</span>.<span
+                                        class="text-blue-400">deploy</span>();</p>
+                                <p class="text-green-500 mt-2">> Pipeline triggered successfully...</p>
+                                <p class="text-green-500">> Infrastructure provisioned...</p>
+                            </div>
+                            <i
+                                class="ph-duotone ph-rocket-launch absolute -bottom-6 -right-6 text-9xl text-slate-800/50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-slate-900/50 relative border-y border-slate-800">
+            <div class="container mx-auto px-6 md:px-12">
+                <div class="flex flex-col md:flex-row gap-12 items-center">
+                    <div class="md:w-1/3" data-aos="fade-right">
+                        <div
+                            class="relative w-64 h-64 mx-auto md:w-full md:h-auto md:aspect-square rounded-2xl overflow-hidden border border-slate-700 group">
+                            <img src="assets/img/me.jpg" alt="Avatar" class="w-full h-full object-cover" />
+                        </div>
+                    </div>
+                    <div class="md:w-2/3" data-aos="fade-left">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 flex items-center gap-3">
+                            <i class="ph-duotone ph-identification-card text-primary"></i> About Me
+                        </h2>
+                        <div class="prose prose-invert prose-lg text-slate-400 max-w-none">
+                            <template x-for="paragraph in data.about.paragraphs">
+                                <p class="mb-4" x-html="paragraph"></p>
+                            </template>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+                                <div
+                                    class="flex items-center gap-3 bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                                        <i class="ph-fill ph-calendar-blank text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-slate-500 uppercase font-semibold">Age</p>
+                                        <p class="font-medium text-slate-200" x-text="data.about.age"></p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center gap-3 bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-accent">
+                                        <i class="ph-fill ph-map-pin text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-slate-500 uppercase font-semibold">Location</p>
+                                        <p class="font-medium text-slate-200" x-text="data.about.location"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-24">
+            <div class="container mx-auto px-6 md:px-12">
+                <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Technical Expertise</h2>
+                    <p class="text-slate-400">My toolbelt combines modern development practices with robust
+                        infrastructure and operations management.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+                    <!-- Dynamic Skill Categories -->
+                    <template x-for="category in data.skills" :key="category.id">
+                        <div class="glass-card p-8 rounded-2xl" data-aos="fade-up" :data-aos-delay="category.delay">
+                            <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6 border"
+                                :class="category.iconBg">
+                                <i class="text-3xl" :class="`${category.icon} ${category.iconColor}`"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-4 text-slate-200" x-text="category.title"></h3>
+                            <p class="text-slate-400 text-sm mb-6 leading-relaxed" x-text="category.description"></p>
+                            <ul class="space-y-3">
+                                <template x-for="item in category.items">
+                                    <li class="flex items-center gap-3 text-slate-300">
+                                        <i class="ph-fill ph-check-circle" :class="category.checkColor"></i>
+                                        <span x-text="item"></span>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Skill Tags Marquee -->
+                <div class="mt-16 flex flex-wrap justify-center gap-4" data-aos="fade-in" data-aos-delay="500">
+                    <template x-for="tag in data.skillTags">
+                        <span
+                            class="px-4 py-2 bg-slate-800 rounded-full text-sm font-medium text-slate-300 border border-slate-700"
+                            x-text="tag"></span>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-24 relative border-t border-slate-800/50">
+            <div class="container mx-auto px-6 md:px-12">
+                <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Education Background</h2>
+                    <p class="text-slate-400">My academic journey and foundational knowledge in Software Engineering.
+                    </p>
+                </div>
+
+                <!-- Timeline Layout -->
+                <div
+                    class="max-w-3xl mx-auto space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:ml-[1.25rem] before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-700 before:to-transparent">
+
+                    <template x-for="edu in data.education" :key="edu.id">
+                        <div class="relative flex items-start gap-6" data-aos="fade-up" :data-aos-delay="edu.delay">
+                            <div
+                                class="flex items-center justify-center w-10 h-10 rounded-full border border-slate-700 bg-slate-800 text-slate-300 shadow shrink-0 z-10 mt-1">
+                                <i class="text-xl" :class="`${edu.icon} ${edu.iconColor}`"></i>
+                            </div>
+                            <div
+                                class="glass-card p-6 rounded-2xl flex-1 hover:-translate-y-1 transition-transform duration-300">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+                                    <h3 class="font-bold text-xl text-slate-200" x-text="edu.degree"></h3>
+                                    <span class="px-3 py-1 border rounded-full text-xs font-medium w-fit mt-2 sm:mt-0"
+                                        :class="edu.periodBg" x-text="edu.period"></span>
+                                </div>
+                                <p class="text-slate-300 font-medium mb-3" x-text="edu.school"></p>
+                                <p class="text-slate-400 text-sm leading-relaxed">
+                                    <template x-if="edu.highlight">
+                                        <span class="block mb-2 text-emerald-400 font-medium"
+                                            x-text="edu.highlight"></span>
+                                    </template>
+                                    <span x-text="edu.description"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </template>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 bg-slate-900/50 relative border-y border-slate-800">
+            <div class="container mx-auto px-6 md:px-12">
+                <div class="flex items-center gap-3 mb-12" data-aos="fade-right">
+                    <i class="ph-duotone ph-briefcase text-3xl text-primary"></i>
+                    <h2 class="text-3xl md:text-4xl font-bold">Best Solutions</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Dynamic Projects -->
+                    <template x-for="project in data.projects" :key="project.id">
+                        <div class="glass-card rounded-2xl overflow-hidden group flex flex-col" data-aos="fade-up">
+                            <div
+                                class="h-48 bg-slate-800 relative overflow-hidden flex items-center justify-center border-b border-slate-700" style="background-image: url('assets/img/Image-45.jpg'); background-size: cover; background-position: center;">
+                                <div
+                                    class="absolute inset-0 bg-black/40"></div>
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 group-hover:scale-110 transition-transform duration-500">
+                                </div>
+                                <i class="text-7xl text-slate-500 group-hover:text-blue-400 transition-colors z-10" x-show="!project.hideIcon"
+                                    :class="project.icon"></i>
+                            </div>
+                            <div class="p-8 flex flex-col flex-grow">
+                                <h3 class="text-2xl font-bold mb-3 text-slate-200 group-hover:text-primary transition-colors"
+                                    x-text="project.title"></h3>
+                                <p class="text-slate-400 mb-6 leading-relaxed flex-grow" x-text="project.description">
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <template x-for="tag in project.tags">
+                                        <span class="px-3 py-1 border rounded-md text-xs font-medium" :class="tag.class"
+                                            x-text="tag.name"></span>
+                                    </template>
+                                </div>
+                                <a :href="project.link" target="_blank" rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-2 text-primary hover:text-primaryHover font-medium transition-colors mt-auto">
+                                    View Demo <i class="ph-bold ph-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="py-24">
+            <div class="container mx-auto px-6 md:px-12">
+                <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Certifications & Awards</h2>
+                    <p class="text-slate-400">Professional credentials that validate my technical knowledge and skills
+                        across various platforms.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Dynamic Certifications -->
+                    <template x-for="cert in data.certifications" :key="cert.id">
+                        <div class="glass-card p-6 rounded-2xl flex items-center gap-6" data-aos="fade-up"
+                            :data-aos-delay="cert.delay">
+                            <div class="w-16 h-16 rounded-full flex items-center justify-center border shrink-0"
+                                :class="cert.iconBg">
+                                <i class="text-4xl" :class="`${cert.icon} ${cert.iconColor}`"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-200" x-text="cert.title"></h3>
+                                <p class="text-slate-400 text-sm mt-1" x-text="cert.issuer"></p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- Affiliate / Recommendations Section -->
+        <section id="affiliates" class="py-24 relative border-t border-slate-800">
+            <div class="container mx-auto px-6 md:px-12">
+                <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 flex items-center justify-center gap-3">
+                        <i class="ph-duotone ph-link text-primary"></i> Recommended Tools
+                    </h2>
+                    <p class="text-slate-400">Services and gear that I personally use and highly recommend for
+                        development & infrastructure.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Dynamic Affiliates -->
+                    <template x-for="aff in data.affiliates" :key="aff.id">
+                        <div class="glass-card p-6 rounded-2xl flex flex-col h-full" data-aos="fade-up"
+                            :data-aos-delay="aff.delay">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 rounded-lg flex items-center justify-center border shrink-0"
+                                    :class="aff.iconBg">
+                                    <i class="text-2xl" :class="`${aff.icon} ${aff.iconColor}`"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-200" x-text="aff.title"></h3>
+                            </div>
+                            <p class="text-slate-400 text-sm mb-6 flex-grow" x-text="aff.description"></p>
+                            <a :href="aff.link" target="_blank"
+                                class="w-full py-2.5 rounded-lg border border-slate-600 hover:border-primary text-slate-300 hover:text-primary transition-colors text-center text-sm font-medium flex items-center justify-center gap-2">
+                                Check It Out <i class="ph-bold ph-arrow-up-right"></i>
+                            </a>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donate / Support Section -->
+        <section id="donate" class="py-20 bg-slate-900/50 relative border-t border-slate-800">
+            <div class="container mx-auto px-6 md:px-12">
+                <div class="max-w-4xl mx-auto glass-card rounded-3xl overflow-hidden border border-slate-700/50"
+                    data-aos="fade-up">
+                    <div class="grid md:grid-cols-2">
+                        <!-- Info Side -->
+                        <div
+                            class="p-8 md:p-12 flex flex-col justify-center border-b md:border-b-0 md:border-r border-slate-700/50">
+                            <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
+                                <i class="ph-duotone ph-coffee text-orange-400"></i> Support My Work
+                            </h2>
+                            <p class="text-slate-400 mb-8 leading-relaxed">
+                                If you find my projects helpful or simply want to buy me a coffee (or a bowl of "mì hảo
+                                hảo"), you can donate via VietQR below. Thank you for your support!
+                            </p>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="text-xs text-slate-500 uppercase font-semibold mb-1">Bank</p>
+                                    <p class="font-bold text-lg text-slate-200" x-text="data.donate.bank"></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-500 uppercase font-semibold mb-1">Account Name</p>
+                                    <p class="font-bold text-lg text-slate-200" x-text="data.donate.name"></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-500 uppercase font-semibold mb-1">Account Number</p>
+                                    <div class="flex items-center gap-3">
+                                        <p class="font-mono font-bold text-xl sm:text-2xl text-primary break-all"
+                                            x-text="data.donate.account"></p>
+                                        <button @click="copyToClipboard(data.donate.account)"
+                                            class="w-8 h-8 rounded bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-300 transition-colors shrink-0"
+                                            title="Copy Account Number">
+                                            <i class="ph-bold"
+                                                :class="copied ? 'ph-check text-green-500' : 'ph-copy'"></i>
+                                        </button>
+                                    </div>
+                                    <p x-show="copied" x-transition class="text-green-500 text-xs mt-1 font-medium">
+                                        Copied to clipboard!</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-500 uppercase font-semibold mb-1">Transfer Message</p>
+                                    <p class="font-medium text-slate-300" x-text="data.donate.message"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- QR Side -->
+                        <div class="p-8 md:p-12 flex items-center justify-center bg-slate-800/30">
+                            <div class="bg-white p-4 rounded-2xl shadow-xl w-52 h-52 sm:w-64 sm:h-64 relative group">
+                                <img :src="data.donate.qrCodeUrl" alt="Donate QR Code"
+                                    class="w-full h-full object-contain rounded-xl">
+                                <!-- QR Overlay scan effect -->
+                                <div
+                                    class="absolute inset-0 border-2 border-primary rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                    <div
+                                        class="w-full h-1 bg-primary absolute top-0 animate-[scan_2s_ease-in-out_infinite]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                @keyframes scan {
+                    0% {
+                        top: 0;
+                        opacity: 0;
+                    }
+
+                    10% {
+                        opacity: 1;
+                    }
+
+                    90% {
+                        opacity: 1;
+                    }
+
+                    100% {
+                        top: 100%;
+                        opacity: 0;
+                    }
+                }
+            </style>
+        </section>
+
+        <!-- CTA / Contact Section -->
+        <section id="contact" class="py-24 relative overflow-hidden border-t border-slate-800">
+            <div class="absolute inset-0 flex items-center justify-center -z-10 opacity-30 pointer-events-none">
+                <div class="w-full max-w-3xl h-64 bg-primary blur-[100px] rounded-full"></div>
+            </div>
+
+            <div class="container mx-auto px-6 md:px-12 text-center" data-aos="zoom-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Let's Build Something Great</h2>
+                <p class="text-slate-400 text-lg mb-10 max-w-2xl mx-auto">
+                    Whether you need a robust CI/CD pipeline, cloud infrastructure optimization, or a dedicated software
+                    engineer for your next project, I'm ready to contribute.
+                </p>
+
+                <!-- Contact Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
+
+                    <!-- Email Button -->
+                    <a :href="`mailto:${data.contact.email}`"
+                        class="w-full sm:w-auto px-8 py-4 bg-white text-slate-900 hover:bg-slate-200 font-bold rounded-lg transition-colors flex items-center justify-center gap-2">
+                        <i class="ph-bold ph-envelope-simple text-xl"></i> Email Me
+                    </a>
+
+                    <!-- Telegram Button -->
+                    <a :href="data.contact.telegram" target="_blank"
+                        class="w-full sm:w-auto px-8 py-4 bg-[#2AABEE]/10 text-[#2AABEE] hover:bg-[#2AABEE] hover:text-white font-bold rounded-lg border border-[#2AABEE]/30 hover:border-[#2AABEE] transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-[#2AABEE]/5 hover:shadow-[#2AABEE]/40 group">
+                        <i class="ph-fill ph-telegram-logo text-2xl group-hover:scale-110 transition-transform"></i>
+                        <span>Chat on t.me</span>
+                    </a>
+
+                    <!-- Other Social Links -->
+                    <div class="flex gap-4">
+                        <a :href="data.contact.linkedin" target="_blank"
+                            class="w-14 h-14 rounded-lg bg-slate-800 hover:bg-[#0A66C2] border border-slate-700 hover:border-[#0A66C2] flex items-center justify-center text-slate-300 hover:text-white transition-all shadow-lg hover:shadow-[#0A66C2]/30"
+                            title="LinkedIn">
+                            <i class="ph-fill ph-linkedin-logo text-2xl"></i>
+                        </a>
+                        <a :href="data.contact.github" target="_blank"
+                            class="w-14 h-14 rounded-lg bg-slate-800 hover:bg-[#333] border border-slate-700 hover:border-[#333] flex items-center justify-center text-slate-300 hover:text-white transition-all shadow-lg hover:shadow-white/10"
+                            title="GitHub">
+                            <i class="ph-fill ph-github-logo text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-8 text-center text-slate-500 text-sm">
+        <div class="container mx-auto px-6">
+            <p>&copy; <span x-text="year"></span> <span x-text="data.hero.name"></span>. All rights reserved.</p>
+            <p class="mt-2 text-xs opacity-60">Designed & Built with HTML, Tailwind CSS, and Alpine.js</p>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

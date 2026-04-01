@@ -1,0 +1,15 @@
+{
+  "name": "portifolio-nguyen-quoc-anh",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npx tailwindcss -i ./solutions/css/input.css -o ./solutions/css/main.css --minify",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d ."
+  },
+  "dependencies": {
+    "gh-pages": "^6.3.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
